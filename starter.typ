@@ -21,55 +21,57 @@ and creates the header and footer for the resume.
   contacts: (),
   body
 ) = {
+  // Define theme color
+  let theme_color = rgb("#2b5c85")
 
   // Sets document metadata
   set document(author: author, title: author)
 
   // Document-wide formatting, including font and margins
   set text(
-    font: "New Computer Modern",
+    font: ("Source Sans Pro", "Roboto", "Arial", "sans-serif"),
     size: 11pt,
     lang: "en"
   )
 
   set page(
     margin: (
-      top: 1.25cm,
-      bottom: 0cm,
+      top: 1.5cm,
+      bottom: 1.5cm,
       left: 1.5cm,
       right: 1.5cm
     ),
   )
 
   show link: set text(
-    fill: rgb("#0645AD")
+    fill: theme_color
   )
   
   // Header parameters, including author and contact information.
   show heading: it => [
-    #pad(top: 0pt, bottom: -15pt, [#smallcaps(it.body)])
-    #line(length: 100%, stroke: 1pt)
+    #pad(top: 0pt, bottom: -15pt, text(fill: theme_color, weight: "bold", smallcaps(it.body)))
+    #line(length: 100%, stroke: 1pt + theme_color)
   ]
 
-  // Author
-  align(center)[
-    #block(text(weight: 700, 2.5em, [#smallcaps(author)]))
-  ]
-
-  // Contact
-  pad(
-    top: 0.25em,
-    align(center)[
-      #smallcaps[#contacts.join("  |  ")]
+  // Header
+  pad(bottom: 1em, grid(
+    columns: (1fr, auto),
+    gutter: 1em,
+    align(left + horizon)[
+      #block(text(weight: 700, 2.5em, fill: theme_color, smallcaps(author)))
+      #if location != "" {
+        pad(top: 0.2em, text(size: 1.1em, fill: gray, style: "italic", location))
+      }
     ],
-  )
-
-  // Location
-  if location != "" {
-    align(center)[
-      #smallcaps[#location]
+    align(right + horizon)[
+      #set text(9pt)
+      #grid(
+        columns: 1,
+        gutter: 0.6em,
+        ..contacts.map(c => align(right, c))
+      )
     ]
-  }
+  ))
 
   // Main body.
   set par(justify: true)
@@ -133,11 +135,14 @@ Skills section formatting, responsible for collapsing individual entries into
 a single list.
 */
 #let skills(areas) = {
-  for area in areas {
-    strong[#area.at(0): ]
-    area.at(1).join(" | ")
-    linebreak()
-  }
+  grid(
+    columns: (15%, 1fr),
+    gutter: 1em,
+    ..areas.map(area => (
+      align(left)[#strong(area.at(0))],
+      area.at(1).join(" | ")
+    )).flatten()
+  )
 }
 
 /*
@@ -152,28 +157,34 @@ Experience section formatting logic.
   details: [],
 ) = {
   pad(
-    bottom: 15%,
+    bottom: 0em,
     grid(
       columns: (auto, 1fr),
+      row-gutter: 0.5em,
       align(left)[
-        #strong[#role] #{ if project != "" [| #emph[#project]] } 
+        #text(size: 1.1em, weight: "bold", fill: rgb("#2b5c85"), role) 
+        #{ 
+            if project != "" [ 
+                #h(0.4em) | #h(0.4em) #text(fill: rgb("#404040"), weight: "regular", project)
+            ] 
+        } 
         #{
           if summary != "" [
-            \ #emph[#summary]
+            \ #text(style: "italic", fill: rgb("#666666"), size: 0.95em, summary)
           ]
         }
       ],
       align(right)[
-        #emph[#date]
+        #text(weight: "semibold", date)
         #{
           if location != "" [
-            \ #emph[#location]
+            \ #text(style: "italic", fill: rgb("#666666"), size: 0.9em, location)
           ]
         }
       ]
     )
   )
-  details
+  pad(left: 0.5em, top: 0em, bottom: 1em, details)
 }
 
 #show: resume.with(
