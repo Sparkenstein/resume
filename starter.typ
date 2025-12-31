@@ -29,7 +29,7 @@ and creates the header and footer for the resume.
 
   // Document-wide formatting, including font and margins
   set text(
-    font: ("Source Sans Pro", "Roboto", "Arial", "sans-serif"),
+    font: "Inter",
     size: 11pt,
     lang: "en"
   )
@@ -48,30 +48,28 @@ and creates the header and footer for the resume.
   )
   
   // Header parameters, including author and contact information.
-  show heading: it => [
-    #pad(top: 0pt, bottom: -15pt, text(fill: theme_color, weight: "bold", smallcaps(it.body)))
-    #line(length: 100%, stroke: 1pt + theme_color)
-  ]
+  show heading: it => {
+    if it.level == 1 {
+      pad(top: 0pt, bottom: -15pt, text(fill: theme_color, weight: "bold", smallcaps(it.body)))
+      line(length: 100%, stroke: 1pt + theme_color)
+    } else {
+      pad(top: 0.5em, bottom: 0.5em, text(fill: theme_color, weight: "bold", it.body))
+    }
+  }
 
   // Header
-  pad(bottom: 1em, grid(
-    columns: (1fr, auto),
-    gutter: 1em,
-    align(left + horizon)[
-      #block(text(weight: 700, 2.5em, fill: theme_color, smallcaps(author)))
-      #if location != "" {
-        pad(top: 0.2em, text(size: 1.1em, fill: gray, style: "italic", location))
-      }
-    ],
-    align(right + horizon)[
-      #set text(9pt)
-      #grid(
-        columns: 1,
-        gutter: 0.6em,
-        ..contacts.map(c => align(right, c))
-      )
-    ]
-  ))
+  pad(bottom: 1em, align(left)[
+    #block(text(weight: 700, 2.5em, fill: theme_color, smallcaps(author)))
+    #if location != "" {
+      pad(top: 0.2em, bottom: 0.5em, text(size: 1.1em, fill: gray, style: "italic", location))
+    }
+    #set text(9pt)
+    #grid(
+      columns: contacts.len() * (auto,),
+      gutter: 1em,
+      ..contacts
+    )
+  ])
 
   // Main body.
   set par(justify: true)
@@ -200,7 +198,7 @@ Experience section formatting logic.
 )
 
 = Summary
-A full-stack js/ts dev with 9+ years of experience. open-source maintainer with large number of stars and recognition on Hackernews. 
+A full-stack TypeScript/Rust dev with 9+ years of experience. open-source maintainer with large number of stars and recognition on Hackernews. 
 Consistent growth over the years, looking for a place to own responsibilities. 
 
 
@@ -253,6 +251,7 @@ Consistent growth over the years, looking for a place to own responsibilities.
   details: [
     - Was part of the founding tech team, owned all responsibilities from hiring to finishing projects
     - Worked on 2 different projects, both full stack, completely owning isolated modules
+    - Promoted to full stack developer after 6 months, responsible for the entire product lifecycle
   ]
 )
 
@@ -265,7 +264,8 @@ Consistent growth over the years, looking for a place to own responsibilities.
   details: [
     - Worked on 3 different Ed-Tech related projects
     - Including on-boarding portal, the dashboard, the learning management 
-    - Worked as a curriculum designer for students, mentoring and tutoring
+    - Worked as a curriculum designer for students
+    - Mentored and tutored more than 5 thousand students
   ]
 )
 
@@ -286,7 +286,36 @@ Consistent growth over the years, looking for a place to own responsibilities.
 
 
 = Projects
-#show: columns.with(2)
+
+Contributions
+#exp(
+  role: link("https://github.com/denoland/deno")[denoland/deno],
+  project: "",
+  summary: "A modern runtime for JavaScript and TypeScript",
+  details: [
+    - Worked on JS side implementing a few URL parsing features
+  ]
+)
+
+#exp(
+  role: link("https://github.com/goniszewski/grimoire")[goniszewski/grimoire],
+  project: "",
+  summary: "Fast bookmark manager",
+  details: [
+    - New features in Svelte, Auth, Documentation etc
+  ]
+)
+
+#exp(
+  role: link("https://github.com/keeweb/kdbxweb")[kdbxweb],
+  project: "",
+  summary: "kdbx file parser and editor for web",
+  details: [
+    - Migrated outdated AES-CBC to AES-GCM, complete test suite revamp, etc
+  ]
+)
+
+Personal Projects
 
 #exp(
   role: link("https://github.com/fosslife/devtools-x")[DevTools-X],
@@ -304,9 +333,7 @@ Consistent growth over the years, looking for a place to own responsibilities.
   role: link("https://github.com/fosslife/truthy")[Truthy],
   project: "",
   details: [
-    - MFA/2FA manager with beautiful UI
-    - Written in Rust
-    - Win, Mac, Lin, Android and IOS support
+    - MFA/2FA manager with beautiful UI, backed in Rust
   ]
 )
 
@@ -316,6 +343,7 @@ Consistent growth over the years, looking for a place to own responsibilities.
   project: "",
   details: [
     - Awesome-list of linux specific ricing
+    - 2k Stars on Github, actively referenced by r/unixporn community
   ]
 )
 
@@ -325,17 +353,17 @@ Consistent growth over the years, looking for a place to own responsibilities.
   project: "",
   details: [
     - Automation bot written 5 years ago, before the age of AI
-    - Can scrape, find answers, auto reply, and what not.
-
+    - Can scrape, find answers, auto reply, manage groups, chats, download media, etc.
   ]
 )
 
+
 #exp(
-  role: link("https://github.com/fosslife/define")[Define],
+  role: link("https://github.com/fosslife/wallnary")[Define],
   project: "",
   details: [
-    - CLI tool for explaining a term on terminal, cross-platform
-
+    - AI powered wallpaper generator that also acts as a English teacher
+    - Fast, customizable, Great UI, config oriented
   ]
 )
 
@@ -344,7 +372,7 @@ Consistent growth over the years, looking for a place to own responsibilities.
   project: "",
   details: [
     - A modern file uploader + URL shortner 
-
+    - Millions of URL per second throughput, multi-region, multi-cloud
   ]
 )
 
