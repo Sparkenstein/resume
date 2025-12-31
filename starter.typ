@@ -189,14 +189,15 @@ Experience section formatting logic.
 )
 
 = Summary
-A full-stack js/ts dev with 7+ years of experience. part time open-source enthusiast, have a big list of open-source projects with large number of stars and recognition on Hackernews too. Consistent growth over the years, looking for a place to own responsibilities. 
+A full-stack js/ts dev with 9+ years of experience. open-source maintainer with large number of stars and recognition on Hackernews. 
+Consistent growth over the years, looking for a place to own responsibilities. 
 
 
 = Skills
 #skills((
   ("Languages", (
     [Full-Stack JavaScript],
-    [Full-stack Typescript],
+    [Typescript],
     [Rust],
     [Python],
   )),
@@ -237,7 +238,7 @@ A full-stack js/ts dev with 7+ years of experience. part time open-source enthus
   project: "Growerhub, Syngenta",
   date: "Oct 2018 - Mar 2020",
   location: "Pune, India",
-  summary: "Syngenta is world leading agro-tech company, worked as pioneer of the tech team",
+  summary: "World's leading agro-tech company, worked as pioneer of the tech team",
   details: [
     - Was part of the founding tech team, owned all responsibilities from hiring to finishing projects
     - Worked on 2 different projects, both full stack, completely owning isolated modules
@@ -245,27 +246,27 @@ A full-stack js/ts dev with 7+ years of experience. part time open-source enthus
 )
 
 #exp(
-  role: "Senior Software Developer",
+  role: "Team Lead",
   project: "MasaiSchool",
   date: "Mar 2020 - Nov 2022",
   location: "Bangalore, India",
   summary: "Part of the founding team, worked on ed-tech",
   details: [
-    - Worked on 3 different education related projects
+    - Worked on 3 different Ed-Tech related projects
     - Including on-boarding portal, the dashboard, the learning management 
     - Worked as a curriculum designer for students, mentoring and tutoring
   ]
 )
 
 #exp(
-  role: "Senior Software Developer",
+  role: "Engineering Manager",
   project: "Bigspring",
   date: "Nov 2022 - present",
-  summary: "Everboarding sales at the speed of innovation",
-  location: "USA",
+  summary: "Native AI tooling for marketing and sales",
+  location: "NY, USA",
   details: [
     - One of my biggest projects, more than 300k LOC
-    - Handling FE, BE and CI. 
+    - Leading a team of 10+ developers, responsible for the entire product lifecycle from ideation to delivery.
     - On-boarded multiple big clients from google to pfizer from all over the place. 
   ]
 )
