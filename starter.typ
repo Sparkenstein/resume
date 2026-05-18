@@ -1,188 +1,67 @@
-
-/*
-This copy of the resume formatting template is provided in the template download in case
-you'd like to make your preferred edits to the template directly.
-
-If you'd like to use this copy instead of the package, you'll need to update the #import
-statement in your resume.typ file to reference this file directly.
-
-Have you made edits or bug fixes to this template that you feel would help out others?
-It would be fantastic if you submitted a pull request to the template repository at
-https://github.com/chaoticgoodcomputing/typst-resume-starter !
-*/
-
-/*
-Core formatting for the template document type. Establishes general document-wide formatting,
-and creates the header and footer for the resume.
-*/
 #let resume(
   author: "",
   location: "",
   contacts: (),
   body
 ) = {
-  // Define theme color
   let theme_color = rgb("#2b5c85")
-
-  // Sets document metadata
   set document(author: author, title: author)
 
-  // Document-wide formatting, including font and margins
-  set text(
-    font: "Inter",
-    size: 11pt,
-    lang: "en"
-  )
+  // Maximum density layout: 0.8cm top/bottom margins, 10pt font
+  set text(font: "Inter", size: 10pt, lang: "en")
+  set page(margin: (top: 0.8cm, bottom: 0.8cm, left: 1cm, right: 1cm))
 
-  set page(
-    margin: (
-      top: 1.5cm,
-      bottom: 1.5cm,
-      left: 1.5cm,
-      right: 1.5cm
-    ),
-  )
-
-  show link: set text(
-    fill: theme_color
-  )
+  show link: set text(fill: theme_color)
   
-  // Header parameters, including author and contact information.
   show heading: it => {
     if it.level == 1 {
-      pad(top: 0pt, bottom: -15pt, text(fill: theme_color, weight: "bold", smallcaps(it.body)))
+      pad(top: 0pt, bottom: -10pt, text(fill: theme_color, weight: "bold", smallcaps(it.body)))
       line(length: 100%, stroke: 1pt + theme_color)
     } else {
-      pad(top: 0.5em, bottom: 0.5em, text(fill: theme_color, weight: "bold", it.body))
+      pad(top: 0.2em, bottom: 0.2em, text(fill: theme_color, weight: "bold", it.body))
     }
   }
 
-  // Header
-  pad(bottom: 1em, align(left)[
-    #block(text(weight: 700, 2.5em, fill: theme_color, smallcaps(author)))
-    #if location != "" {
-      pad(top: 0.2em, bottom: 0.5em, text(size: 1.1em, fill: gray, style: "italic", location))
-    }
-    #set text(9pt)
-    #grid(
-      columns: contacts.len() * (auto,),
-      gutter: 1em,
-      ..contacts
-    )
-  ])
+  // Ultra-condensed header
+  align(center)[
+    #block(text(weight: 700, 2em, fill: theme_color, smallcaps(author)))
+    #pad(top: 0.2em, bottom: 0.3em)[
+      #text(size: 0.9em, fill: gray, style: "italic", location) | 
+      #contacts.join("  •  ")
+    ]
+  ]
 
-  // Main body.
   set par(justify: true)
-
   body
 }
 
-/*
-Allows hiding or showing full resume dynamically using global variable. This can
-be helpful for creating a single document that can be rendered differently depending on
-the desired output, for cases where you'd like to simultaneously render both a full copy
-and a single-page instance of only the most important or vital information.
-*/
-#let hide(should-hide, content) = {
-  if not should-hide {
-    content
-  }
-}
-
-/*
-Education section formatting, allowing enumeration of degrees and GPA
-*/
-#let edu(
-  institution: "",
-  date: "",
-  degrees: (),
-  gpa: "",
-  location: ""
-) = {
-  pad(
-    bottom: 10%,
-    grid(
-      columns: (auto, 1fr),
-      align(left)[
-        #strong[#institution]
-        #{
-          if gpa != "" [
-            | #emph[GPA: #gpa]
-          ]
-        }
-        \ #{
-          for degree in degrees [
-            #strong[#degree.at(0)] | #emph[#degree.at(1)] \
-          ]
-        }
-      ],
-      align(right)[
-        #emph[#date]
-        #{
-          if location != "" [
-            \ #emph[#location]
-          ]
-        }
-      ]
-    )
-  )
-}
-
-/*
-Skills section formatting, responsible for collapsing individual entries into
-a single list.
-*/
-#let skills(areas) = {
-  grid(
-    columns: (15%, 1fr),
-    gutter: 1em,
-    ..areas.map(area => (
-      align(left)[#strong(area.at(0))],
-      area.at(1).join(" | ")
-    )).flatten()
-  )
-}
-
-/*
-Experience section formatting logic.
-*/
 #let exp(
   role: "",
   project: "",
   date: "",
   location: "",
-  summary: "",
   details: [],
 ) = {
   pad(
     bottom: 0em,
     grid(
       columns: (auto, 1fr),
-      row-gutter: 0.5em,
+      row-gutter: 0.2em,
       align(left)[
-        #text(size: 1.1em, weight: "bold", fill: rgb("#2b5c85"), role) 
+        #text(size: 1.05em, weight: "bold", fill: rgb("#2b5c85"), role) 
         #{ 
             if project != "" [ 
-                #h(0.4em) | #h(0.4em) #text(fill: rgb("#404040"), weight: "regular", project)
+                #h(0.4em) | #h(0.4em) #text(fill: rgb("#404040"), weight: "semibold", project)
             ] 
         } 
-        #{
-          if summary != "" [
-            \ #text(style: "italic", fill: rgb("#666666"), size: 0.95em, summary)
-          ]
-        }
       ],
       align(right)[
-        #text(weight: "semibold", date)
-        #{
-          if location != "" [
-            \ #text(style: "italic", fill: rgb("#666666"), size: 0.9em, location)
-          ]
-        }
+        #text(weight: "semibold", size: 0.95em, date)
       ]
     )
   )
-  pad(left: 0.5em, top: 0em, bottom: 1em, details)
+  // Tighter padding here to save vertical space
+  pad(left: 0.5em, top: 0.2em, bottom: 0.4em, details)
 }
 
 #show: resume.with(
@@ -193,65 +72,38 @@ Experience section formatting logic.
     [#link("https://prabhanjan.dev")[Website]],
     [#link("https://github.com/fosslife")[GitHub]],
     [#link("https://linkedin.com/in/Sparkenstein")[LinkedIn]],
-  ),
-  // footer: [#align(center)[#emph[References available on request]]]
+  )
 )
 
 = Summary
-A full-stack TypeScript/Rust dev with 9+ years of experience. open-source maintainer with large number of stars and recognition on Hackernews. 
-Consistent growth over the years, looking for a place to own responsibilities. 
-
+Full-stack engineer with 9+ years scaling production systems across AI, ed-tech, and developer tooling. Open-source author (5,000+ GitHub stars, \#1 on HackerNews) and Open-Source contributor; works comfortably across Rust/Node services, React frontends, and multi-cloud infra.
 
 = Skills
-#skills((
-  ("Languages", (
-    [Full-Stack JavaScript],
-    [Typescript],
-    [Rust],
-    [Python],
-  )),
-  ("Software", (
-    [Vim, VS Code],
-    [Git],
-    [Linux, Mac, Windows],
-    [Figma],
-  )),
-  ("Frameworks", (
-    [React, Solid, NextJS],
-    [Axum, Tokio, etc],
-    [Fastapi, Flask, Telethon]
-  )),
-  ("Tools", (
-    [AWS, GCP],
-    [Docker, Podman],
-    [Postgres, MongoDB, Dgraph],
-  ))
-))
-
+#pad(top: 0.3em, bottom: 0.4em)[
+  *Languages:* JavaScript, TypeScript, Rust, Python, Bash \
+  *Frameworks:* React, Solid, Next.js, Astrojs, Axum, Tokio, FastAPI, Flask \
+  *Tools & Cloud:* AWS, GCP, Docker, Podman, Postgres, MongoDB, Dgraph, Linux, Git
+]
 
 = Experience
+
 #exp(
-  role: "Front-end Developer",
-  project: "Identity and Access Government",
-  date: "Sept 2016 - Oct 2018",
-  location: "Pune, India",
-  summary: "Junior developer working on dedicated suite of software",
+  role: "Lead Engineer",
+  project: "reps.ai",
+  date: "2025 - present",
   details: [
-    - Owning entire suite of products for a complete lifecycle from scratch
-    - Rewrote the entire thing from AngularJS v1 to React in a matter of 3 months
+    - Architecting the core AI-native platform from the ground up, owning system design, infra, and the engineering roadmap.
+    - Building and leading the team of 6 for a high impact ai product
   ]
 )
 
 #exp(
-  role: "Full-Stack Developer",
-  project: "Growerhub, Syngenta",
-  date: "Oct 2018 - Mar 2020",
-  location: "Pune, India",
-  summary: "World's leading agro-tech company, worked as pioneer of the tech team",
+  role: "Engineering Manager",
+  project: "Bigspring",
+  date: "Nov 2022 - 2025",
   details: [
-    - Was part of the founding tech team, owned all responsibilities from hiring to finishing projects
-    - Worked on 2 different projects, both full stack, completely owning isolated modules
-    - Promoted to full stack developer after 6 months, responsible for the entire product lifecycle
+    - Cut average API latency from 1s+ to ~50ms on the platform's hot path, sustaining 8K active users per minute on a 300K-LOC Next.js / Node / GraphQL stack.
+    - Designed the multi-tenant infrastructure (isolation, billing, onboarding) powering enterprise deployments for Google and Pfizer; led 10+ engineers across architecture reviews, hiring, and releases.
   ]
 )
 
@@ -259,195 +111,51 @@ Consistent growth over the years, looking for a place to own responsibilities.
   role: "Team Lead",
   project: "MasaiSchool",
   date: "Mar 2020 - Nov 2022",
-  location: "Bangalore, India",
-  summary: "Part of the founding team, worked on ed-tech",
   details: [
-    - Worked on 3 different Ed-Tech related projects
-    - Including on-boarding portal, the dashboard, the learning management 
-    - Worked as a curriculum designer for students
-    - Mentored and tutored more than 5 thousand students
+    - Built 3 core ed-tech platforms (onboarding portal, student dashboard, LMS) in React, Python, Astro, and Svelte; scaled the LMS to 2,500 concurrent students per live lecture.
+    - Authored technical curricula and mentored 5,000+ students in modern full-stack engineering.
   ]
 )
 
 #exp(
-  role: "Engineering Manager",
-  project: "Bigspring",
-  date: "Nov 2022 - present",
-  summary: "Native AI tooling for marketing and sales",
-  location: "NY, USA",
+  role: "Full-Stack Developer",
+  project: "Growerhub, Syngenta",
+  date: "Oct 2018 - Mar 2020",
   details: [
-    - One of my biggest projects, more than 300k LOC
-    - Leading a team of 10+ developers, responsible for the entire product lifecycle from ideation to delivery.
-    - On-boarded multiple big clients from google to pfizer from all over the place. 
-  ]
-)
-
-
-
-
-= Projects
-
-Contributions
-#exp(
-  role: link("https://github.com/denoland/deno")[denoland/deno],
-  project: "",
-  summary: "A modern runtime for JavaScript and TypeScript",
-  details: [
-    - Worked on JS side implementing a few URL parsing features
+    - Founding engineer on Syngenta's agro-tech product; shipped 2 full-stack apps with geospatial mapping and image-processing pipelines for field-level crop analytics.
   ]
 )
 
 #exp(
-  role: link("https://github.com/goniszewski/grimoire")[goniszewski/grimoire],
-  project: "",
-  summary: "Fast bookmark manager",
+  role: "Front-end Developer",
+  project: "Identity and Access Government",
+  date: "Sept 2016 - Oct 2018",
   details: [
-    - New features in Svelte, Auth, Documentation etc
+    - Migrated a legacy enterprise suite from AngularJS v1 to React in 3 months and set up the component patterns the team continued to build on.
+  ]
+)
+
+= Key Projects & Open Source
+
+#exp(
+  role: "Author",
+  project: link("https://github.com/fosslife/devtools-x")[DevTools-X] + " & " + link("https://github.com/fosslife/delta")[Delta],
+  date: "Open Source",
+  details: [
+    - *DevTools-X:* Cross-platform desktop toolbox for developers built with React and Rust (Tauri); reached \#1 on HackerNews and 5,000+ GitHub stars across projects.
+    - *Delta:* Multi-region file uploader and URL shortener on multi-cloud infrastructure, designed for millions of requests per second.
   ]
 )
 
 #exp(
-  role: link("https://github.com/keeweb/kdbxweb")[kdbxweb],
-  project: "",
-  summary: "kdbx file parser and editor for web",
+  role: "Contributor",
+  project: link("https://github.com/denoland/deno")[denoland/deno],
+  date: "TypeScript/JavaScript Runtime",
   details: [
-    - Migrated outdated AES-CBC to AES-GCM, complete test suite revamp, etc
+    - Fixed #link("https://github.com/denoland/deno/pull/7017")[`URLSearchParams.toString()`] to match browser behavior, added #link("https://github.com/denoland/deno/pull/8462")[`cargo-deny`] CI integration, and contributed #link("https://github.com/denoland/deno/pull/6998")[zsh completion docs].
   ]
 )
 
-Personal Projects
-
-#exp(
-  role: link("https://github.com/fosslife/devtools-x")[DevTools-X],
-  project: "",
-  details: [
-    - Cross-platform collection of tools
-    - Written in React and Rust
-    - Has Compressors to Hashers to Generators
-    - Listed on front-page in HN at \#1
-  ]
-)
-
-
-#exp(
-  role: link("https://github.com/fosslife/truthy")[Truthy],
-  project: "",
-  details: [
-    - MFA/2FA manager with beautiful UI, backed in Rust
-  ]
-)
-
-
-#exp(
-  role: link("https://github.com/fosslife/awesome-ricing")[Awesome-Ricing],
-  project: "",
-  details: [
-    - Awesome-list of linux specific ricing
-    - 2k Stars on Github, actively referenced by r/unixporn community
-  ]
-)
-
-
-#exp(
-  role: link("https://github.com/fosslife/grambot")[Grambot],
-  project: "",
-  details: [
-    - Automation bot written 5 years ago, before the age of AI
-    - Can scrape, find answers, auto reply, manage groups, chats, download media, etc.
-  ]
-)
-
-
-#exp(
-  role: link("https://github.com/fosslife/wallnary")[Define],
-  project: "",
-  details: [
-    - AI powered wallpaper generator that also acts as a English teacher
-    - Fast, customizable, Great UI, config oriented
-  ]
-)
-
-#exp(
-  role: link("https://github.com/fosslife/delta")[Delta],
-  project: "",
-  details: [
-    - A modern file uploader + URL shortner 
-    - Millions of URL per second throughput, multi-region, multi-cloud
-  ]
-)
-
-
-
-
-
-
-
-/*
-
-#exp(
-  role: link("")[The Delorean],
-  project: "",
-  summary: "",
-  details: [
-    - 
-  ]
-)
-
-*/
-
-
-
-
-/*
-
-===============================
-===== ADDITIONAL SECTIONS =====
-===============================
-
-In general, the only hard-advised sections of a resume that I've seen consistently recommended are the Education (or equivalent) and Experience sections. The other sections are largely up to you. However, here are some recommendations based on other sections I've seen people use to great effect, or use on my own resume:
-
-- Projects, especially if you're in the tech industry where personal projects are encouraged or expected
-- Volunteering
-- Charity
-- Leadership
-- Awards (which, depending on your preferences, could reasonably use a different entry format)
-
-A flavor of section that I see a lot - and would NOT recommend - is something along the lines of "Hobbies" or "Interests". This is occasionally recommended to give "flavor" to your resume or "humanize" you in some way. 
-
-(I understand that putting quotes around "flavor" and "humanize" make me sound like a boring robot of a person, but bear with me, here.)
-
-> If you're tempted to make (or are transferring over from an old resume that has) a Hobbies (or Hobbies-adjacent) section, I would advise you structure your hobbies as Projects and use a Projects section instead.
-
-Many hobbies (sports, programming, gaming, knitting(?), graphic design/drawing, writing, woodworking, baking, etc) can be safely structured in the same way Projects would be, and allow you to highlight interesting things about yourself in a way that follows the same design pattern as the rest of your experiences.
-
-=== Opinion: Making Additional Sections Work ===
-
-If you're making a resume for the first time or are early in your career, you may feel yourself straining to fill vertical space. If that's the case - or if you're just looking to liven up your resume a bit - I'd recommend doing a "throw it all in the kitchen sink" approach.
-
-With this approach, create new entries for anything that you could possibly conceive of as being interesting, taught you skills, or could be an even half-viable answer to somebody asking you "So, what have you done with your life?" A lot of things that don't feel like they'd fit into the hand-shakey, back-pat-y world of business, industry, and academia can be spun into things that feel like they belong on a resume.
-
-Some examples of experiences people have put that have been used to great effect, and some general examples of how I've seen them stated, are:
-
-- Sports Leagues/Fitness (intramural, professional, etc)
-  - Constructing routines
-  - Designing training plans
-  - Cooperation/collaboration
-- Gaming (competitively, recreationally, collaboratively (e.g. D&D))
-  - Competitively (cooperation/team-building/recruiting)
-  - Speedrunning (attention to detail, QA, methodology)
-  - Creating games as a learning experience
-  - Playing/leading D&D as a design experience (homebrewed content, especially), coordinating people, etc.
-- Woodworking/Construction
-- Planning projects
-- Creating designs
-- Solving problems
-- Making brownies
-  - This isn't even a bit. The guy's name is Dylan, and his brownies kicked so much ass that they got these-brownies-kicked-ass-type awards. He had it on his CV and got into MIT — probably not *solely* off the brownies, but I'd take an even-money bet that it helped.
-
-In general, whatever you throw in the kitchen sink, the key is describing it with the same structure and detail as your experience, trying to fit it into the XYZ bullet structure as well as possible. Even if your experience is really weird, the way you describe it can be the difference between "Why did they even bother mentioning that?" and "Oh, that is pretty impressive!"
-
-I would also recommend having the same approach with these entries as you'd take for your Skills section, where you pretty judicially add and remove (comment out!) things from this section for the jobs you're applying for, based on what might fight best with the general "vibe" of the applications you're doing. While your job experience is a pretty binary "Describe the last X jobs you've had over the last Y years", this section is very fluid by comparison.
-
-In this section especially, I'd recommend following the guidance for hyperlinking mentioned in the Experience section above.
-
-*/
+#pad(left: 0.5em, top: 0.1em, text(size: 0.9em, style: "italic", fill: gray)[
+  60+ additional projects (CLIs, libraries, experiments) at #link("https://github.com/fosslife")[github.com/fosslife].
+])
