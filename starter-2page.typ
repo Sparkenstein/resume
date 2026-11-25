@@ -65,22 +65,23 @@
   author: "Prabhanjan Padhye",
   location: "Pune, India",
   contacts: (
-    [#link("mailto:prabhanjan@fosslife.com")[Email]],
-    [#link("https://prabhanjan.dev")[Website]],
-    [#link("https://github.com/fosslife")[GitHub]],
-    [#link("https://linkedin.com/in/Sparkenstein")[LinkedIn] #text(size: 0.85em, fill: gray)[(2.5K+)]],
+    [#link("mailto:prabhanjan@fosslife.com")[prabhanjan\@fosslife.com]],
+    [#link("https://prabhanjan.dev")[prabhanjan.dev]],
+    [#link("https://github.com/fosslife")[github.com/fosslife]],
+    [#link("https://linkedin.com/in/Sparkenstein")[linkedin.com/in/Sparkenstein] #text(size: 0.85em, fill: gray)[(2.5K+)]],
   )
 )
 
 = Summary
-Full-stack engineer with 9+ years scaling production systems across AI, ed-tech, and developer tooling. Open-source author (5,000+ GitHub stars across projects, \#1 on HackerNews) and active contributor to runtimes including Deno. Comfortable across Rust/Node services, React frontends, and multi-cloud infrastructure; equally hands-on as an individual contributor and as a lead shaping team direction.
+Senior full-stack engineer with 10 years building and scaling production systems across AI, ed-tech, and developer tooling. Most recently the first engineer on an enterprise AI platform, building its real-time voice and roleplay pipeline end to end. Open-source author (5,000+ GitHub stars, \#1 on HackerNews) and Deno contributor; hands-on across Rust/Node services, React frontends, LLM integrations, and multi-cloud infrastructure.
 
 = Skills
 #pad(top: 0.3em, bottom: 0.4em)[
-  *Languages:* JavaScript, TypeScript, Rust, Python, Go, Bash, SQL \
-  *Frontend:* React, Solid, Next.js, Astro, Svelte, Tauri \
-  *Backend:* Node.js, Axum, Tokio, FastAPI, Flask, GraphQL, REST, WebSockets \
-  *Data & Infra:* Postgres, MongoDB, Dgraph, Redis, Kafka, Docker, Podman, Kubernetes \
+  *Languages:* JavaScript, TypeScript, Rust, Python, Bash, SQL \
+  *Frontend:* React, Next.js, Angular, Svelte, Astro, Tauri \
+  *Backend:* Node.js, Axum, Tokio, FastAPI, GraphQL, REST, WebSockets \
+  *AI:* Gemini Live API, OpenAI API, real-time voice pipelines, speech-to-text, LLM translation, persona design \
+  *Data & Infra:* Postgres, MongoDB, Redis, Docker, Podman \
   *Cloud & Ops:* AWS, GCP, Cloudflare, Terraform, GitHub Actions, Linux, Git \
   *Practices:* System design, multi-tenant architecture, performance tuning, hiring & mentorship
 ]
@@ -90,19 +91,21 @@ Full-stack engineer with 9+ years scaling production systems across AI, ed-tech,
 #exp(
   role: "Lead Engineer",
   project: "reps.ai",
-  date: "2025 - present",
+  date: "Feb 2025 - Present",
   details: [
-    - Architecting the core AI-native platform from the ground up, owning system design, infra, and the engineering roadmap.
-    - Building and leading the team of 6 for a high impact AI product.
+    - First engineer on an enterprise AI platform that prepares workforces to execute on launches, adoption, and enablement; designed and built the core product end to end, owning architecture, infra, and the technical roadmap.
+    - Built the real-time AI roleplay engine (voice conversations, transcription, translation, persona simulation) on Gemini Live and OpenAI APIs.
+    - Automated roleplay authoring with an AI pipeline that drafts, reviews, and judges scenarios, cutting creation time from 2 days to a few minutes.
+    - Grew the team to 6 engineers, personally hiring 3; lead it hands-on, owning system design and code review.
   ]
 )
 
 #exp(
   role: "Engineering Manager",
   project: "Bigspring",
-  date: "Nov 2022 - 2025",
+  date: "Nov 2022 - Feb 2025",
   details: [
-    - Cut average API latency from 1s+ to ~50ms on the platform's hot path, sustaining 8K active users per minute on a 300K-LOC Next.js / Node / GraphQL stack.
+    - Cut average API latency from 1s+ to \~50ms on the platform's hot path, sustaining 8K concurrent users #box[(k6 load-tested)] on a 300K-LOC Next.js / Node / GraphQL stack.
     - Designed the multi-tenant infrastructure (isolation, billing, onboarding) powering enterprise deployments for Google and Pfizer; led 10+ engineers across architecture reviews, hiring, and releases.
   ]
 )
@@ -113,23 +116,23 @@ Full-stack engineer with 9+ years scaling production systems across AI, ed-tech,
   date: "Mar 2020 - Nov 2022",
   details: [
     - Built 3 core ed-tech platforms (onboarding portal, student dashboard, LMS) in React, Python, Astro, and Svelte; scaled the LMS to 2,500 concurrent students per live lecture.
-    - Authored technical curricula and mentored 5,000+ students in modern full-stack engineering.
+    - Authored all core technical courses and mentored 5,000+ students in full-stack engineering; 2,500+ placed in engineering roles.
   ]
 )
 
 #exp(
   role: "Full-Stack Developer",
-  project: "Growerhub, Syngenta",
+  project: "Syngenta (Growerhub, Cropwise)",
   date: "Oct 2018 - Mar 2020",
   details: [
-    - Founding engineer on Syngenta's agro-tech product; shipped 2 full-stack apps with geospatial mapping and image-processing pipelines for field-level crop analytics.
+    - Founding engineer on Growerhub, Syngenta's farmer-facing app, and early contributor to Cropwise during the platform transition (Cropwise now covers 180M+ acres globally); shipped 2 full-stack apps with geospatial mapping and image-processing pipelines for field-level crop analytics.
   ]
 )
 
 #exp(
   role: "Front-end Developer",
-  project: "Identity and Access Government",
-  date: "Sept 2016 - Oct 2018",
+  project: "Confluxsys",
+  date: "Sep 2016 - Oct 2018",
   details: [
     - Migrated a legacy enterprise suite from AngularJS v1 to React in 3 months and set up the component patterns the team continued to build on.
   ]
@@ -151,7 +154,7 @@ Full-stack engineer with 9+ years scaling production systems across AI, ed-tech,
   project: link("https://github.com/fosslife/delta")[Delta],
   date: "Rust, Multi-cloud",
   details: [
-    - Multi-region file uploader and URL shortener built on multi-cloud infrastructure (S3, GCS, R2), designed for millions of requests per second with per-region failover.
+    - Multi-region file uploader and URL shortener built on multi-cloud infrastructure (S3, GCS, R2), built for horizontal multi-region scale with per-region failover.
   ]
 )
 
@@ -216,14 +219,6 @@ Full-stack engineer with 9+ years scaling production systems across AI, ed-tech,
     - Coursework: Data Structures & Algorithms, Operating Systems, Databases, Computer Networks, Compilers, Distributed Systems.
   ]
 )
-
-= Certifications
-
-#pad(top: 0.3em, bottom: 0.4em, left: 0.5em)[
-  - *Cisco Certified Network Engineer* — Cisco, 2014
-  - *Certified Kubenetes Administrator* — Lynda.com, 2017
-  - *Certified Android Developer* — Google, 2015
-]
 
 = Talks & Writing
 

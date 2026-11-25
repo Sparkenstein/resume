@@ -68,21 +68,22 @@
   author: "Prabhanjan Padhye",
   location: "Pune, India",
   contacts: (
-    [#link("mailto:prabhanjan@fosslife.com")[Email]],
-    [#link("https://prabhanjan.dev")[Website]],
-    [#link("https://github.com/fosslife")[GitHub]],
-    [#link("https://linkedin.com/in/Sparkenstein")[LinkedIn]],
+    [#link("mailto:prabhanjan@fosslife.com")[prabhanjan\@fosslife.com]],
+    [#link("https://prabhanjan.dev")[prabhanjan.dev]],
+    [#link("https://github.com/fosslife")[github.com/fosslife]],
+    [#link("https://linkedin.com/in/Sparkenstein")[linkedin.com/in/Sparkenstein]],
   )
 )
 
 = Summary
-Full-stack engineer with 9+ years scaling production systems across AI, ed-tech, and developer tooling. Open-source author (5,000+ GitHub stars, \#1 on HackerNews) and Open-Source contributor; works comfortably across Rust/Node services, React frontends, and multi-cloud infra.
+Senior full-stack engineer with 10 years building production systems across AI, ed-tech, and developer tooling; most recently built an enterprise AI platform's real-time voice and roleplay pipeline end to end. Open-source author (5,000+ GitHub stars, \#1 on HackerNews) and Deno contributor, hands-on across Rust/Node, React, LLM integrations, and multi-cloud infra.
 
 = Skills
 #pad(top: 0.3em, bottom: 0.4em)[
   *Languages:* JavaScript, TypeScript, Rust, Python, Bash \
-  *Frameworks:* React, Solid, Next.js, Astrojs, Axum, Tokio, FastAPI, Flask \
-  *Tools & Cloud:* AWS, GCP, Docker, Podman, Postgres, MongoDB, Dgraph, Linux, Git
+  *Frameworks:* React, Next.js, Angular, Svelte, Astro, Tauri, Node.js, Axum, Tokio, FastAPI, GraphQL \
+  *AI:* Gemini Live API, OpenAI API, real-time voice pipelines, speech-to-text, LLM translation, persona design \
+  *Tools & Cloud:* AWS, GCP, Docker, Podman, Postgres, MongoDB, Linux, Git
 ]
 
 = Experience
@@ -90,19 +91,21 @@ Full-stack engineer with 9+ years scaling production systems across AI, ed-tech,
 #exp(
   role: "Lead Engineer",
   project: "reps.ai",
-  date: "2025 - present",
+  date: "Feb 2025 - Present",
   details: [
-    - Architecting the core AI-native platform from the ground up, owning system design, infra, and the engineering roadmap.
-    - Building and leading the team of 6 for a high impact ai product
+    - First engineer on an enterprise AI execution-readiness platform; designed and built the core product end to end, owning architecture, infra, and the technical roadmap.
+    - Built the real-time AI roleplay engine (voice, transcription, translation, personas) on Gemini Live and OpenAI.
+    - Designed an AI pipeline that drafts, reviews, and judges roleplays, cutting creation time from 2 days to minutes.
+    - Grew the team to 6 engineers, personally hiring 3; lead it hands-on, owning system design and code review.
   ]
 )
 
 #exp(
   role: "Engineering Manager",
   project: "Bigspring",
-  date: "Nov 2022 - 2025",
+  date: "Nov 2022 - Feb 2025",
   details: [
-    - Cut average API latency from 1s+ to ~50ms on the platform's hot path, sustaining 8K active users per minute on a 300K-LOC Next.js / Node / GraphQL stack.
+    - Cut average API latency from 1s+ to \~50ms on the platform's hot path, sustaining 8K concurrent users #box[(k6 load-tested)] on a 300K-LOC Next.js / Node / GraphQL stack.
     - Designed the multi-tenant infrastructure (isolation, billing, onboarding) powering enterprise deployments for Google and Pfizer; led 10+ engineers across architecture reviews, hiring, and releases.
   ]
 )
@@ -113,25 +116,26 @@ Full-stack engineer with 9+ years scaling production systems across AI, ed-tech,
   date: "Mar 2020 - Nov 2022",
   details: [
     - Built 3 core ed-tech platforms (onboarding portal, student dashboard, LMS) in React, Python, Astro, and Svelte; scaled the LMS to 2,500 concurrent students per live lecture.
-    - Authored technical curricula and mentored 5,000+ students in modern full-stack engineering.
+    - Authored all core technical courses and mentored 5,000+ students; 2,500+ placed in engineering roles.
   ]
 )
 
 #exp(
   role: "Full-Stack Developer",
-  project: "Growerhub, Syngenta",
+  project: "Syngenta (Growerhub, Cropwise)",
   date: "Oct 2018 - Mar 2020",
   details: [
-    - Founding engineer on Syngenta's agro-tech product; shipped 2 full-stack apps with geospatial mapping and image-processing pipelines for field-level crop analytics.
+    - Founding engineer on Growerhub, Syngenta's farmer-facing app, and early contributor to Cropwise during the platform transition (Cropwise now covers 180M+ acres globally); shipped 2 full-stack apps with geospatial mapping and image-processing pipelines for field-level crop analytics.
   ]
 )
 
+
 #exp(
   role: "Front-end Developer",
-  project: "Identity and Access Government",
-  date: "Sept 2016 - Oct 2018",
+  project: "Confluxsys",
+  date: "Sep 2016 - Oct 2018",
   details: [
-    - Migrated a legacy enterprise suite from AngularJS v1 to React in 3 months and set up the component patterns the team continued to build on.
+    - Migrated a legacy enterprise suite from AngularJS to React in 3 months.
   ]
 )
 
@@ -140,10 +144,10 @@ Full-stack engineer with 9+ years scaling production systems across AI, ed-tech,
 #exp(
   role: "Author",
   project: link("https://github.com/fosslife/devtools-x")[DevTools-X] + " & " + link("https://github.com/fosslife/delta")[Delta],
-  date: "Open Source",
+  date: "Open Source  •  60+ projects",
   details: [
     - *DevTools-X:* Cross-platform desktop toolbox for developers built with React and Rust (Tauri); reached \#1 on HackerNews and 5,000+ GitHub stars across projects.
-    - *Delta:* Multi-region file uploader and URL shortener on multi-cloud infrastructure, designed for millions of requests per second.
+    - *Delta:* Multi-cloud (S3, GCS, R2) file uploader and URL shortener, built for horizontal multi-region scale.
   ]
 )
 
@@ -152,10 +156,7 @@ Full-stack engineer with 9+ years scaling production systems across AI, ed-tech,
   project: link("https://github.com/denoland/deno")[denoland/deno],
   date: "TypeScript/JavaScript Runtime",
   details: [
-    - Fixed #link("https://github.com/denoland/deno/pull/7017")[`URLSearchParams.toString()`] to match browser behavior, added #link("https://github.com/denoland/deno/pull/8462")[`cargo-deny`] CI integration, and contributed #link("https://github.com/denoland/deno/pull/6998")[zsh completion docs].
+    - Fixed #link("https://github.com/denoland/deno/pull/7017")[`URLSearchParams.toString()`] browser parity, added #link("https://github.com/denoland/deno/pull/8462")[`cargo-deny`] CI, and wrote #link("https://github.com/denoland/deno/pull/6998")[zsh completion docs].
   ]
 )
 
-#pad(left: 0.5em, top: 0.1em, text(size: 0.9em, style: "italic", fill: gray)[
-  60+ additional projects (CLIs, libraries, experiments) at #link("https://github.com/fosslife")[github.com/fosslife].
-])
